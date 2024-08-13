@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Queue Service Test</title>
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+    <h1>Queue Service Notifications</h1>
+    <ul id="events"></ul>
+
+    <script>
+        const socket = io();
+
+        socket.on('queue-updated', (data) => {
+            const eventList = document.getElementById('events');
+            const newEvent = document.createElement('li');
+            newEvent.textContent = `Client ${data.clientId} was ${data.action} in queue ${data.queueName}`;
+            eventList.appendChild(newEvent);
+        });
+    </script>
+</body>
+</html>
