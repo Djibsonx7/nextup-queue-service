@@ -11,9 +11,19 @@
     <ul id="events"></ul>
 
     <script>
+        console.log('Attempting to connect to server...');
         const socket = io();
 
+        socket.on('connect', () => {
+            console.log('Connected to server');
+        });
+
+        socket.on('connect_error', (err) => {
+            console.error('Connection error:', err);
+        });
+
         socket.on('queue-updated', (data) => {
+            console.log('Received data:', data);
             const eventList = document.getElementById('events');
             const newEvent = document.createElement('li');
             newEvent.textContent = `Client ${data.clientId} was ${data.action} in queue ${data.queueName}`;
