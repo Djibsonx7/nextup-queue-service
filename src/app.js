@@ -15,8 +15,8 @@ app.use('/api/queue', queueRoutes);  // Utilisation des routes pour les files d'
 
 // Démarrage du serveur
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
 
-module.exports = app;
+module.exports = { app, server };
